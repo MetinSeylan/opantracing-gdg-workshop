@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Metin",
+    "surname": "Seylan",
+    "vehicle": "Dacia Sandero Stepway"
+  },
+  {
+    "id": 2,
+    "name": "Aybüke",
+    "surname": "Çalışkan",
+    "vehicle": "Nissan Juke"
+  },
+  {
+    "id": 3,
+    "name": "Cemil",
+    "surname": "Yavaşca",
+    "vehicle": "X-Max 250"
+  }
+]

@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "Mobile Phone",
+    "product-code": 85334
+  },
+  {
+    "id": 2,
+    "name": "Scotty Food Order",
+    "product-code": 21343
+  },
+  {
+    "id": 3,
+    "name": "Scotty T-Shirt",
+    "product-code": 11234
+  }
+]
