@@ -13,6 +13,7 @@
     "request": "^2.88.0",
     "zipkin": "^0.15.0",
     "zipkin-instrumentation-express": "^0.15.0",
-    "zipkin-instrumentation-request": "^0.15.0"
+    "zipkin-instrumentation-request": "^0.15.0",
+    "zipkin-transport-http": "^0.15.0"
   }
 }
