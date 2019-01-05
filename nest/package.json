@@ -22,14 +22,18 @@
   "dependencies": {
     "@nestjs/common": "^5.1.0",
     "@nestjs/core": "^5.1.0",
+    "axios": "^0.18.0",
     "reflect-metadata": "^0.1.12",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.5",
     "rxjs": "^6.2.2",
     "typescript": "^3.0.1",
     "zipkin": "^0.15.0",
+    "zipkin-context-cls": "^0.15.0",
+    "zipkin-instrumentation-axios": "^0.1.0",
     "zipkin-instrumentation-express": "^0.15.0",
     "zipkin-instrumentation-request": "^0.15.0",
+    "zipkin-instrumentation-request-promise": "^0.15.0",
     "zipkin-transport-http": "^0.15.0"
   },
   "devDependencies": {

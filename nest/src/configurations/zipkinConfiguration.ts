@@ -3,8 +3,10 @@ import {Tracer, ExplicitContext, BatchRecorder} from 'zipkin';
 import {HttpLogger} from "zipkin-transport-http";
 import * as zipkin from "zipkin";
 import JSON_V1 = zipkin.jsonEncoder.JSON_V1;
-const RequestWrapper = require('zipkin-instrumentation-request');
-const Request = require('request-promise-native');
+const wrapAxios = require('zipkin-instrumentation-axios');
+import {expressMiddleware} from "zipkin-instrumentation-express";
+import Axios, {AxiosStatic} from 'axios';
+const CLSContext = require('zipkin-context-cls');
 
 @Injectable()
 export class ZipkinConfiguration {
@@ -15,8 +17,12 @@ export class ZipkinConfiguration {
     private readonly tracer: Tracer;
 
     constructor() {
-        const ctxImpl = new ExplicitContext();
+        const ctxImpl = new CLSContext();
         this.tracer = new Tracer({ctxImpl, recorder: this.getRecorder(), localServiceName: this.localServiceName});
+    }
+
+    public getMiddleware(){
+        return expressMiddleware({tracer: this.tracer});
     }
 
     private getRecorder(): BatchRecorder {
@@ -32,8 +38,8 @@ export class ZipkinConfiguration {
         return this.tracer;
     }
 
-    public makeServiceClient(remoteServiceName: string): Request {
-        return RequestWrapper(Request, {tracer: this.tracer, remoteServiceName});
+    public getClient(remoteServiceName: string): AxiosStatic {
+        return wrapAxios(Axios, { tracer: this.tracer, serviceName: remoteServiceName});
     }
 
 }
