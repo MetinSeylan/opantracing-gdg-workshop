@@ -11,11 +11,13 @@ export class ZipkinContextMiddleware implements NestMiddleware {
     resolve(...args: any[]): MiddlewareFunction {
         return (req, res, next) => {
 
-            req.traceId = new TraceId({
-                traceId: new option.Some(req.headers["x-b3-traceid"]),
-                spanId: req.headers["x-b3-spanid"],
-                sampled: new option.Some(req.headers["x-b3-sampled"]),
-            });
+            if(req.headers['x-b3-traceid']){
+                req.traceId = new TraceId({
+                    traceId: new option.Some(req.headers["x-b3-traceid"]),
+                    spanId: req.headers["x-b3-spanid"],
+                    sampled: new option.Some(req.headers["x-b3-sampled"]),
+                });
+            }
 
             this.zipkinConfiguration.getTracer().setId(req.traceId);
 

@@ -13,10 +13,7 @@ export class OrderServiceClient {
     }
 
     async retrieveOrders(): Promise<Object> {
-
         const client = this.zipkinConfiguration.getClient(this.serviceName);
-
-        console.log('before', this.zipkinConfiguration.getTracer().id.toString());
 
         // @ts-ignore
         const response = await client.get(this.baseUrl);

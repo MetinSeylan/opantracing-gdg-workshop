@@ -9,7 +9,9 @@ export class AppController {
 
     @Get("/getAllOrders")
     getOrders(@Res() res, @Req() req): Promise<void> {
-        this.zipkinConfiguration.getTracer().setId(req.traceId);
+        if(req.traceId){
+            this.zipkinConfiguration.getTracer().setId(req.traceId);
+        }
 
         return this.orderService.retrieveOrders().then(result => res.json(result));
     }

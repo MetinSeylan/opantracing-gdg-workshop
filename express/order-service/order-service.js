@@ -13,7 +13,7 @@ const {HttpLogger} = require('zipkin-transport-http');
 const port = 1923;
 const localServiceName = 'order-service';
 const orders = require("./orders.json");
-const jaegerSpanUrl = process.env.JAEGER_URL ? process.env.JAEGER_URL : "http://localhost:9411/api/v1/spans";
+const jaegerSpanUrl = "http://localhost:9411/api/v1/spans";
 
 // Boot Up!
 const app = Express();
@@ -26,23 +26,23 @@ const recorder = new BatchRecorder({
     })
 });
 
-
 const tracer = new Tracer({ctxImpl, recorder, localServiceName});
 
 const orderDriverClient = wrapRequest(request, {tracer, remoteServiceName: "order-driver-service"});
-
 
 // Apply Middleware
 app.use(zipkinMiddleware({tracer, port}));
 
 // Endpoints
 app.get('/', (req, res) => {
+
     orderDriverClient({
         url: 'http://localhost:1924/drivers',
         method: 'GET',
     }, (error, response, drivers) => {
         res.json({orders, drivers: JSON.parse(drivers)});
     });
+
 });
 
 app.listen(port, () => console.log(`${localServiceName} listening on port ${port}!`));
